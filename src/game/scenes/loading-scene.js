@@ -22,6 +22,11 @@ export default class LoadingScene extends Phaser.Scene {
    * die Ressourcen dann im Game-Loop verwendet werden können.
    */
   preload() {
+    this.load.spritesheet("player", ". /assets/player.png", {
+      frameWidth: 32,
+      frameHeigth: 32,
+    })
+
     // Lade das Tileset für die Karten und die Objekte.
     this.load.image("tileset", "./assets/tileset.png")
 
@@ -32,7 +37,11 @@ export default class LoadingScene extends Phaser.Scene {
       "./assets/tileset.png",
       "./assets/atlas/atlas-pickups.json",
     )
-
+    this.load.atlas(
+      "doors"
+      "./assets/tileset.png" ,
+      "./assets/atlas/atlas-doors.json",
+    )
     // Wir möchten auf das Drücken der Leertaste reagieren können, daher müssen
     // wir das hier registrieren.
     this.SPACE = this.input.keyboard.addKey(
