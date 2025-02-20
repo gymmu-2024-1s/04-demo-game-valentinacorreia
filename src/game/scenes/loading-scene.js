@@ -22,7 +22,7 @@ export default class LoadingScene extends Phaser.Scene {
    * die Ressourcen dann im Game-Loop verwendet werden können.
    */
   preload() {
-    this.load.spritesheet("player", ". /assets/player.png", {
+    this.load.spritesheet("player", "./assets/player.png", {
       frameWidth: 32,
       frameHeigth: 32,
     })
@@ -30,7 +30,7 @@ export default class LoadingScene extends Phaser.Scene {
     // Lade das Tileset für die Karten und die Objekte.
     this.load.image("tileset", "./assets/tileset.png")
 
-    // Lade einen Atlas von einem Tileset. Damit können einzelne Kacheln aus
+    // Lade einen Atlas von einem Tileset. Damit können einzelne Kacheln aushttps://www.lenovo.com/
     // einem Tileset definiert werden.
     this.load.atlas(
       "pickups",
@@ -38,8 +38,8 @@ export default class LoadingScene extends Phaser.Scene {
       "./assets/atlas/atlas-pickups.json",
     )
     this.load.atlas(
-      "doors"
-      "./assets/tileset.png" ,
+      "doors",
+      "./assets/tileset.png",
       "./assets/atlas/atlas-doors.json",
     )
     // Wir möchten auf das Drücken der Leertaste reagieren können, daher müssen
@@ -79,7 +79,32 @@ export default class LoadingScene extends Phaser.Scene {
       // Die Leertaste wurde gedrückt, jetzt möchten wir eine neue Szene laden.
       // Das was wir hier übergeben, ist der Schlüssel/Name der Szene, so wie
       // es im Konstruktor angegeben wurde.
-      this.scene.start("level-00")
+      this.scene.start("level-01")
     }
+  }
+  createanimation() {
+    // Das erstellt uns eine Animation. Hier können wir mehrere Parameter übergeben
+    // um die Animation zu definieren.
+    this.anims.create({
+      key: "player_idle", // Das ist der Name der Animation, den brauchen wir um die Animation abzuspielen
+      frames: this.anims.generateFrameNumbers("player", {
+        // Das übernimmt das eigentlich erstellen der Animationsframes. Hier geben wir an von welchem Spritesheet die Animation erstellt wird. Das Spritesheet muss natürlich auch in der `preload`-Methode geladen werden.
+        start: 1, // Bei welcher Kachel die Animation beginnt.
+        end: 1, // Bei welcher Kachel die Animation fertig ist.
+      }),
+      frameRate: 10, // Mit welcher Geschwindigkeit die Animation abläuft. Spielt hier keine Rolle, denn wir haben nur 1 Frame
+      repeat: -1, // Wie oft die Animation wiederholt wird. Mit -1 läuft sie in einer Dauerschleife.
+    })
+
+    // Hier wird die Animation für das Rechtslaufen erstellt.
+    this.anims.create({
+      key: "player_right",
+      frames: this.anims.generateFrameNumbers("player", {
+        start: 6,
+        end: 8,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    })
   }
 }
